@@ -2,10 +2,10 @@
 import Hamburger from './Hamburger.astro';
 const navItems = [
 	{ label: 'Sample Item', href: '#main-content' },
-	{ label: 'Sample Item 2', href: '/sample-2' },
-	{ label: 'Sample Item 3', href: '/sample-3' },
-	{ label: 'Sample Item 4', href: '/sample-4' },
-	{ label: 'Sample Item 5', href: '/sample-5' },
+	{ label: 'Sample Item 2', href: '#main-content' },
+	{ label: 'Sample Item 3', href: '#main-content' },
+	{ label: 'Sample Item 4', href: '#main-content' },
+	{ label: 'Sample Item 5', href: '#main-content' },
 ];
 ---
 
@@ -13,7 +13,7 @@ const navItems = [
 	<div class="nav-wrapper">
 		<div class="nav-bar-mobile">
 			<div class="nav-group-logo">
-				<a href="/">Link</a>
+				<slot name="logo" />
 			</div><div class="invisible-hamburger">
 				<Hamburger />
 			</div>
@@ -23,7 +23,7 @@ const navItems = [
 			<span class="menu-toggle-text visually-hidden">Menu</span></button
 		>
 		<div class="nav-group-main nav-mobile-hidden" id="menu-main-group">
-			<div class="nav-links-group">
+			<div class="nav-links-group" id="menu-links-group">
 				{
 					navItems.map((item) => (
 						<a
@@ -157,9 +157,7 @@ const navItems = [
 			padding: 0;
 			font-size: 1rem;
 		}
-		.nav-group-contribute {
-			margin: 0;
-		}
+
 		.nav-group-main {
 			flex-grow: 1;
 			justify-content: space-between;
@@ -168,13 +166,15 @@ const navItems = [
 		.nav-links-group {
 			flex-direction: row;
 			gap: 2rem;
+			background-color: transparent;
 		}
 		#menu-toggle[aria-expanded] + #menu-main-group {
 			display: flex;
-			position: static;
+			position: relative;
 			flex-direction: row;
 			align-items: center;
 			gap: 2rem;
+			opacity: 1;
 		}
 		#menu-toggle,
 		#menu-close {
@@ -215,13 +215,6 @@ const navItems = [
 	document.querySelector('#menu-main-group')?.addEventListener('focusout', (e) => {
 		const menu = e.currentTarget;
 		if (!menu.contains(e.relatedTarget)) {
-			hideMobileMenu();
-		}
-	});
-
-	// hide the menu when a link is clicked, but not if the background is clicked
-	document.querySelector('#menu-main-group')?.addEventListener('click', (e) => {
-		if (e.target.tagName === 'A') {
 			hideMobileMenu();
 		}
 	});
