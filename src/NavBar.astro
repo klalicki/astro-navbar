@@ -40,10 +40,6 @@ const navItems = [
 	nav {
 		--size-navbar-padding: 1rem;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: var(--size-navbar-padding);
-		border-bottom: 1px solid var(--color-borders);
 	}
 	.nav-wrapper {
 		display: flex;
@@ -53,6 +49,8 @@ const navItems = [
 		position: relative;
 		text-align: center;
 		overflow-y: auto;
+		background-color: yellow;
+		padding: var(--size-navbar-padding);
 	}
 
 	.nav-links-group {
@@ -68,8 +66,7 @@ const navItems = [
 		left: 0px;
 		right: 0px;
 		height: 100%;
-		/* padding: 1rem; */
-		/* overflow-y: auto; */
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -79,7 +76,7 @@ const navItems = [
 		z-index: 10;
 		transform: none;
 		transition: all 0.3s;
-		backdrop-filter: blur(20px);
+		background-color: white;
 	}
 
 	#menu-toggle[aria-expanded='false'] + #menu-main-group {
@@ -99,6 +96,7 @@ const navItems = [
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding: 0.5em;
 	}
 
 	.menu-toggle-icon {
@@ -108,9 +106,6 @@ const navItems = [
 	}
 
 	#menu-toggle[aria-expanded='true'] {
-		position: fixed;
-		top: var(--size-navbar-padding);
-		right: var(--size-navbar-padding);
 	}
 
 	.nav-item {
@@ -164,6 +159,11 @@ const navItems = [
 		#menu-close {
 			display: none;
 		}
+	}
+
+	.visually-hidden {
+		position: absolute;
+		top: -100vh;
 	}
 </style>
 
