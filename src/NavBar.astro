@@ -1,7 +1,7 @@
 ---
 import Hamburger from './Hamburger.astro';
 const navItems = [
-	{ label: 'Sample Item', href: '/sample' },
+	{ label: 'Sample Item', href: '#main-content' },
 	{ label: 'Sample Item 2', href: '/sample-2' },
 	{ label: 'Sample Item 3', href: '/sample-3' },
 	{ label: 'Sample Item 4', href: '/sample-4' },
@@ -47,6 +47,9 @@ const navItems = [
 		--color-nav-dropdown-background: lightgreen;
 		display: flex;
 		flex-direction: column;
+		position: sticky;
+		top: 0;
+		z-index: 100;
 	}
 	.nav-wrapper {
 		display: flex;
@@ -212,6 +215,13 @@ const navItems = [
 	document.querySelector('#menu-main-group')?.addEventListener('focusout', (e) => {
 		const menu = e.currentTarget;
 		if (!menu.contains(e.relatedTarget)) {
+			hideMobileMenu();
+		}
+	});
+
+	// hide the menu when a link is clicked, but not if the background is clicked
+	document.querySelector('#menu-main-group')?.addEventListener('click', (e) => {
+		if (e.target.tagName === 'A') {
 			hideMobileMenu();
 		}
 	});
