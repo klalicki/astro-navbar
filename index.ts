@@ -5,5 +5,5 @@
 // export type { HelloWorldResult } from "./src/types.ts"
 
 import Component from './src/Component.astro';
-
-export default Component;
+import NavBar from './src/NavBar.astro';
+export { NavBar, Component };
