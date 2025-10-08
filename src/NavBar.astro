@@ -11,8 +11,12 @@ const navItems = [
 
 <nav>
 	<div class="nav-wrapper">
-		<div class="nav-group-logo">
-			<a href="/"></a>
+		<div class="nav-bar-mobile">
+			<div class="nav-group-logo">
+				<a href="/">Link</a>
+			</div><div class="invisible-hamburger">
+				<Hamburger />
+			</div>
 		</div>
 		<button id="menu-toggle" class="btn" aria-controls="menu-main-group" aria-expanded="false">
 			<Hamburger />
@@ -39,17 +43,24 @@ const navItems = [
 <style>
 	nav {
 		--size-navbar-padding: 1rem;
+		--color-navbar-background: lightblue;
+		--color-nav-dropdown-background: lightgreen;
 		display: flex;
+		flex-direction: column;
 	}
 	.nav-wrapper {
 		display: flex;
+		flex-direction: column;
+	}
+	.nav-bar-mobile {
+		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 100%;
+
 		position: relative;
 		text-align: center;
 		overflow-y: auto;
-		background-color: yellow;
+		background-color: var(--color-navbar-background);
 		padding: var(--size-navbar-padding);
 	}
 
@@ -58,54 +69,61 @@ const navItems = [
 		flex-direction: column;
 		align-items: center;
 		gap: 0rem;
+		position: absolute;
+		background-color: var(--color-nav-dropdown-background);
+		width: 100%;
+		padding: var(--size-navbar-padding);
 	}
 
 	#menu-main-group {
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		right: 0px;
-		height: 100%;
-
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 0rem;
-
+		top: 0;
+		left: 0;
 		overflow-y: auto;
 		z-index: 10;
 		transform: none;
 		transition: all 0.3s;
-		background-color: white;
 	}
 
 	#menu-toggle[aria-expanded='false'] + #menu-main-group {
 		display: none;
+		opacity: 0;
 	}
 	#menu-toggle[aria-expanded='true'] + #menu-main-group,
 	#menu-toggle + #menu-main-group:focus-within {
 		display: flex;
+		opacity: 1;
 	}
 	h2 {
 		margin-top: 1rem;
 		margin-bottom: 0.5rem;
 	}
 
-	#menu-toggle {
+	#menu-toggle,
+	.invisible-hamburger {
 		z-index: 50;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		padding: 0.5em;
 	}
+	.invisible-hamburger {
+		visibility: hidden;
+	}
+
+	#menu-toggle {
+		position: absolute;
+		top: var(--size-navbar-padding);
+		right: var(--size-navbar-padding);
+	}
 
 	.menu-toggle-icon {
 		font-size: 1.5rem;
 	}
 	.menu-toggle-text {
-	}
-
-	#menu-toggle[aria-expanded='true'] {
 	}
 
 	.nav-item {
@@ -129,7 +147,7 @@ const navItems = [
 		.nav-wrapper {
 			flex-direction: row;
 			width: 100%;
-			max-width: var(--size-padded-page);
+			background-color: var(--color-navbar-background);
 			justify-content: space-between;
 		}
 		.nav-item {
