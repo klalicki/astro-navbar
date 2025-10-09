@@ -1,5 +1,6 @@
 ---
 import Hamburger from './Hamburger.astro';
+const { class: className, ...rest } = Astro.props;
 const navItems = [
 	{ label: 'Sample Item', href: '#main-content' },
 	{ label: 'Sample Item 2', href: '#main-content' },
@@ -9,7 +10,7 @@ const navItems = [
 ];
 ---
 
-<nav>
+<nav class={className} {...rest}>
 	<div class="nav-wrapper">
 		<div class="nav-bar-mobile">
 			<div class="nav-group-logo">
@@ -45,6 +46,7 @@ const navItems = [
 		--size-navbar-padding: 1rem;
 		--color-navbar-background: lightblue;
 		--color-nav-dropdown-background: lightgreen;
+		--color-nav-button-hover: white;
 		display: flex;
 		flex-direction: column;
 		position: sticky;
@@ -100,10 +102,6 @@ const navItems = [
 		display: flex;
 		opacity: 1;
 	}
-	h2 {
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
-	}
 
 	#menu-toggle,
 	.invisible-hamburger {
@@ -112,6 +110,12 @@ const navItems = [
 		flex-direction: column;
 		align-items: center;
 		padding: 0.5em;
+		background-color: transparent;
+		border: none;
+	}
+	#menu-toggle:hover,
+	#menu-toggle:focus {
+		background-color: var(--color-nav-button-hover);
 	}
 	.invisible-hamburger {
 		visibility: hidden;
@@ -214,7 +218,8 @@ const navItems = [
 	// Hide the mobile menu when focus moves outside of it
 	document.querySelector('#menu-main-group')?.addEventListener('focusout', (e) => {
 		const menu = e.currentTarget;
-		if (!menu.contains(e.relatedTarget)) {
+		const menuButton = document.querySelector('#menu-toggle');
+		if (!menu.contains(e.relatedTarget) && !menuButton.contains(e.relatedTarget)) {
 			hideMobileMenu();
 		}
 	});
