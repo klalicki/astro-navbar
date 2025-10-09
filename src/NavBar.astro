@@ -47,6 +47,10 @@ const navItems = [
 		--color-navbar-background: lightblue;
 		--color-nav-dropdown-background: lightgreen;
 		--color-nav-button-hover: white;
+		--nav-desktop-justify: space-between;
+		--nav-desktop-width: 800px;
+		--nav-desktop-placement: center;
+
 		display: flex;
 		flex-direction: column;
 		position: sticky;
@@ -150,11 +154,16 @@ const navItems = [
 	@media screen and (min-width: 900px) {
 		nav {
 			border-bottom: none;
+			display: flex;
+			flex-direction: row;
+			justify-content: var(--nav-desktop-placement);
+			background-color: var(--color-navbar-background);
 		}
 		.nav-wrapper {
 			flex-direction: row;
 			width: 100%;
-			background-color: var(--color-navbar-background);
+			max-width: var(--nav-desktop-width);
+			/* background-color: var(--color-navbar-background); */
 			justify-content: space-between;
 		}
 		.nav-item {
@@ -164,8 +173,7 @@ const navItems = [
 
 		.nav-group-main {
 			flex-grow: 1;
-			justify-content: space-between;
-			padding-left: 4rem;
+			justify-content: var(--nav-desktop-justify);
 		}
 		.nav-links-group {
 			flex-direction: row;
